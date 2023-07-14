@@ -1,0 +1,79 @@
+{
+  "candidates": [
+    {
+      "name": "Russel M. Nelson",
+      "ordained": "1984-04-07",
+      "dob": "1924-09-09"
+    },
+    {
+      "name": "Dallin H. Oaks",
+      "ordained": "1984-05-03",
+      "dob": "1932-08-12"
+    },
+    {
+      "name": "M. Russell Ballard",
+      "ordained": "1985-10-06",
+      "dob": "1928-10-08"
+    },
+    {
+      "name": "Jeffrey R. Holland",
+      "ordained": "1994-06-23",
+      "dob": "1940-12-03"
+    },
+    {
+      "name": "Henry B. Eyring",
+      "ordained": "1995-04-01",
+      "dob": "1933-05-31"
+    },
+    {
+      "name": "Dieter F. Uchtdorf",
+      "ordained": "2004-10-07",
+      "dob": "1940-11-06"
+    },
+    {
+      "name": "David A. Bednar",
+      "ordained": "2004-10-07",
+      "dob": "1952-06-15"
+    },
+    {
+      "name": "Quentin L. Cook",
+      "ordained": "2007-10-06",
+      "dob": "1940-09-08"
+    },
+    {
+      "name": "D. Todd Christofferson",
+      "ordained": "2008-04-05",
+      "dob": "1945-01-24"
+    },
+    {
+      "name": "Neil L. Andersen",
+      "ordained": "2009-04-04",
+      "dob": "1951-08-09"
+    },
+    {
+      "name": "Ronald A. Rasband",
+      "ordained": "2015-10-03",
+      "dob": "1951-02-06"
+    },
+    {
+      "name": "Gary E. Stevenson",
+      "ordained": "2015-10-03",
+      "dob": "1955-08-06"
+    },
+    {
+      "name": "Dale G. Renlund",
+      "ordained": "2015-10-03",
+      "dob": "1952-11-13"
+    },
+    {
+      "name": "Gerrit W. Gong",
+      "ordained": "2018-03-31",
+      "dob": "1953-12-23"
+    },
+    {
+      "name": "Ulisses Soares",
+      "ordained": "2018-03-31",
+      "dob": "1958-10-02"
+    }
+  ]
+}

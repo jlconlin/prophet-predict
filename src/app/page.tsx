@@ -1,9 +1,12 @@
 'use client';
 
 import {useState, useEffect} from 'react';
+import {ProphetPredictionType} from '@/types/index';
 
-export default function Home() {
-  const [results, setResults] = useState([]);
+export default function Home(): JSX.Element {
+  const [results, setResults] = useState<ProphetPredictionType>({
+    candidates: [],
+  });
   useEffect(() => {
     async function getResults() {
       const data = await fetch('/api/results');
@@ -17,5 +20,11 @@ export default function Home() {
     console.log('debug1', results);
   }, [results]);
 
-  return <div>test</div>;
+  return (
+    <div>
+      {results.candidates.map((candidate, index) => {
+        return <div key={index}>{candidate.name}</div>;
+      })}
+    </div>
+  );
 }

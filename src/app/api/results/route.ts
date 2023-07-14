@@ -1,13 +1,10 @@
-import {NextRequest, NextResponse} from 'next/server';
+import {NextResponse} from 'next/server';
+import {ProphetPredictionType} from '@/types/index';
+import {ProphetPrediction} from '@/lib/ProphetPredication';
 
-interface MyResponse {
-  id: number;
-  name: string;
-  todd: string;
-}
-
-export async function GET(request: NextRequest): Promise<NextResponse> {
-  const responseBody: MyResponse = {id: 1, name: 'test', todd: 'bill'};
+export async function GET(): Promise<NextResponse> {
+  const prophetPrediction = new ProphetPrediction();
+  const responseBody: ProphetPredictionType = prophetPrediction;
 
   return NextResponse.json(responseBody);
 }
