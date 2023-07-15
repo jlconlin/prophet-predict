@@ -4,9 +4,7 @@ import {useState, useEffect} from 'react';
 import {ProphetPredictionType} from '@/types/index';
 
 export default function Home(): JSX.Element {
-  const [results, setResults] = useState<ProphetPredictionType>({
-    candidates: [],
-  });
+  const [results, setResults] = useState<ProphetPredictionType | null>(null);
   useEffect(() => {
     async function getResults() {
       const data = await fetch('/api/results');
@@ -22,7 +20,7 @@ export default function Home(): JSX.Element {
 
   return (
     <div>
-      {results.candidates.map((candidate, index) => {
+      {results?.candidates.map((candidate, index) => {
         return <div key={index}>{candidate.name}</div>;
       })}
     </div>
