@@ -12,7 +12,7 @@ export class Candidate implements CandidateType {
   dob: Date;
   ordinationDate: Date;
   seniorApostles: string[];
-  dailyLifeExpectancies: DailyLifeExpectanciesType | null;
+  dailyLifeExpectancies: DailyLifeExpectanciesType;
   id: string;
   daysSinceBirth!: number;
   actuarialTable!: DailyRate;
@@ -22,7 +22,7 @@ export class Candidate implements CandidateType {
     this.dob = new Date(candidateRaw.dob);
     this.ordinationDate = new Date(candidateRaw.ordinationDate);
     this.seniorApostles = [];
-    this.dailyLifeExpectancies = null;
+    this.dailyLifeExpectancies = {};
     this.id = uuidv4();
     this.calculateDaysSinceBirth();
   }
@@ -38,6 +38,14 @@ export class Candidate implements CandidateType {
   }
 
   calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
-    console.log('calculateDailyLifeExpectancies', actuarialLifeTable);
+    const deathIncrement = this.actuarialTable.deathProbability / 365;
+    for (let i = 0; i <= 365; i++) {
+      const probabilityDead = i * deathIncrement;
+      const probabilityLiving = 1 - probabilityDead;
+      this.dailyLifeExpectancies[i] = {
+        probabilityLiving,
+        probabilityDead,
+      };
+    }
   }
 }

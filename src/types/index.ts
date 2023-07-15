@@ -5,7 +5,6 @@ export interface DailyLifeExpectanciesType {
 export interface DailyLifeExpectancy {
   probabilityLiving: number;
   probabilityDead: number;
-  probabilityProphet: number;
 }
 export interface CandidateRawType {
   name: string;
@@ -21,7 +20,7 @@ export interface CandidateType {
   id: string;
   daysSinceBirth: number;
   actuarialTable: DailyRate;
-  dailyLifeExpectancies: DailyLifeExpectanciesType | null;
+  dailyLifeExpectancies: DailyLifeExpectanciesType;
   loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
   calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
 }
