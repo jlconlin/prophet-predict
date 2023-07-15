@@ -35,4 +35,14 @@ export interface ActuarialLifeTableRawType {
 
 export interface ActuarialLifeTableType {
   raw: ActuarialLifeTableRawType;
+  dailyRates: DailyRates;
+}
+
+export interface DailyRate {
+  deathProbability: number;
+  lifeExpectancy: number;
+}
+
+export interface DailyRates {
+  [key: number]: DailyRate;
 }
