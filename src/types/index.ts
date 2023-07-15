@@ -18,6 +18,9 @@ export interface CandidateType {
   seniorApostles: string[];
   dates: ProphetPredictionDate[];
   id: string;
+  daysSinceBirth: number;
+  actuarialTable: DailyRate;
+  loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
 }
 
 export interface ProphetPredictionType {

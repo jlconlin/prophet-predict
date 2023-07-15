@@ -3,6 +3,8 @@ import {
   CandidateType,
   CandidateRawType,
   ProphetPredictionDate,
+  DailyRates,
+  DailyRate,
 } from '@/types/index';
 
 export class Candidate implements CandidateType {
@@ -12,6 +14,8 @@ export class Candidate implements CandidateType {
   seniorApostles: string[];
   dates: ProphetPredictionDate[];
   id: string;
+  daysSinceBirth!: number;
+  actuarialTable!: DailyRate;
 
   constructor(candidateRaw: CandidateRawType) {
     this.name = candidateRaw.name;
@@ -20,5 +24,16 @@ export class Candidate implements CandidateType {
     this.seniorApostles = [];
     this.dates = [];
     this.id = uuidv4();
+    this.calculateDaysSinceBirth();
+  }
+
+  calculateDaysSinceBirth(): void {
+    this.daysSinceBirth = Math.floor(
+      (new Date().getTime() - this.dob.getTime()) / (1000 * 60 * 60 * 24)
+    );
+  }
+
+  loadActuarialTableValues(actuarialLifeTable: DailyRates): void {
+    this.actuarialTable = actuarialLifeTable[this.daysSinceBirth];
   }
 }
