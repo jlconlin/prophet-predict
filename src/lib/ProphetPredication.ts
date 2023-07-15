@@ -2,17 +2,21 @@ import {
   ProphetPredictionType,
   CandidateRawType,
   CandidateType,
+  ActuarialLifeTableType,
 } from '@/types/index';
 import {Candidate} from './Candidate';
+import {ActuarialLifeTable} from './ActuarialLifeTable';
 import candidatesRawData from '@/data/candidatesRaw.json';
 const candidatesRaw = candidatesRawData as CandidateRawType[];
 
 export class ProphetPrediction implements ProphetPredictionType {
   candidates: CandidateType[];
+  actuarialLifeTable: ActuarialLifeTableType;
 
   constructor() {
     this.candidates = [];
     this.calculate();
+    this.actuarialLifeTable = new ActuarialLifeTable();
   }
 
   calculate(): void {

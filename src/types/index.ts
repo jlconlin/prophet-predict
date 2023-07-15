@@ -22,4 +22,17 @@ export interface CandidateType {
 
 export interface ProphetPredictionType {
   candidates: CandidateType[];
+  actuarialLifeTable: ActuarialLifeTableType;
+}
+
+export interface ActuarialLifeTableAgeType {
+  deathProbability: number;
+  lifeExpectancy: number;
+}
+export interface ActuarialLifeTableRawType {
+  [key: number]: ActuarialLifeTableAgeType;
+}
+
+export interface ActuarialLifeTableType {
+  raw: ActuarialLifeTableRawType;
 }
