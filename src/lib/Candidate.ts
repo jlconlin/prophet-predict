@@ -2,9 +2,9 @@ import {v4 as uuidv4} from 'uuid';
 import {
   CandidateType,
   CandidateRawType,
-  ProphetPredictionDate,
   DailyRates,
   DailyRate,
+  DailyLifeExpectanciesType,
 } from '@/types/index';
 
 export class Candidate implements CandidateType {
@@ -12,7 +12,7 @@ export class Candidate implements CandidateType {
   dob: Date;
   ordinationDate: Date;
   seniorApostles: string[];
-  dates: ProphetPredictionDate[];
+  dailyLifeExpectancies: DailyLifeExpectanciesType | null;
   id: string;
   daysSinceBirth!: number;
   actuarialTable!: DailyRate;
@@ -22,7 +22,7 @@ export class Candidate implements CandidateType {
     this.dob = new Date(candidateRaw.dob);
     this.ordinationDate = new Date(candidateRaw.ordinationDate);
     this.seniorApostles = [];
-    this.dates = [];
+    this.dailyLifeExpectancies = null;
     this.id = uuidv4();
     this.calculateDaysSinceBirth();
   }
@@ -35,5 +35,9 @@ export class Candidate implements CandidateType {
 
   loadActuarialTableValues(actuarialLifeTable: DailyRates): void {
     this.actuarialTable = actuarialLifeTable[this.daysSinceBirth];
+  }
+
+  calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
+    console.log('calculateDailyLifeExpectancies', actuarialLifeTable);
   }
 }

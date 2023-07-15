@@ -18,6 +18,7 @@ export class ProphetPrediction implements ProphetPredictionType {
     this.calculate();
     this.actuarialLifeTable = new ActuarialLifeTable();
     this.loadCandidatesActuarialTableValues();
+    this.calculateCandidatesGranularLifeExpectancy();
   }
 
   calculate(): void {
@@ -45,6 +46,14 @@ export class ProphetPrediction implements ProphetPredictionType {
   loadCandidatesActuarialTableValues(): void {
     this.candidates.forEach((candidate: CandidateType) => {
       candidate.loadActuarialTableValues(this.actuarialLifeTable.dailyRates);
+    });
+  }
+
+  calculateCandidatesGranularLifeExpectancy(): void {
+    this.candidates.forEach((candidate: CandidateType) => {
+      candidate.calculateDailyLifeExpectancies(
+        this.actuarialLifeTable.dailyRates
+      );
     });
   }
 }

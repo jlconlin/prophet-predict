@@ -1,10 +1,12 @@
-export interface ProphetPredictionDate {
-  date: Date;
+export interface DailyLifeExpectanciesType {
+  [key: string]: DailyLifeExpectancy;
+}
+
+export interface DailyLifeExpectancy {
   probabilityLiving: number;
   probabilityDead: number;
   probabilityProphet: number;
 }
-
 export interface CandidateRawType {
   name: string;
   dob: string;
@@ -16,11 +18,12 @@ export interface CandidateType {
   dob: Date;
   ordinationDate: Date;
   seniorApostles: string[];
-  dates: ProphetPredictionDate[];
   id: string;
   daysSinceBirth: number;
   actuarialTable: DailyRate;
+  dailyLifeExpectancies: DailyLifeExpectanciesType | null;
   loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
+  calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
 }
 
 export interface ProphetPredictionType {
