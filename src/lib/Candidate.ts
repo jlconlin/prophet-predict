@@ -9,7 +9,7 @@ export class Candidate implements CandidateType {
   name: string;
   dob: Date;
   ordinationDate: Date;
-  seniorApostles: number[];
+  seniorApostles: string[];
   dates: ProphetPredictionDate[];
   id: string;
 

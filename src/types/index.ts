@@ -15,7 +15,7 @@ export interface CandidateType {
   name: string;
   dob: Date;
   ordinationDate: Date;
-  seniorApostles: number[];
+  seniorApostles: string[];
   dates: ProphetPredictionDate[];
   id: string;
 }
