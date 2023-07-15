@@ -1,5 +1,4 @@
 import {
-  ActuarialLifeTableAgeType,
   ActuarialLifeTableRawType,
   ActuarialLifeTableType,
   DailyRates,
@@ -42,6 +41,5 @@ export class ActuarialLifeTable implements ActuarialLifeTableType {
         };
       }
     }
-    // this.dailyRates = {1: {deathProbability: 0, lifeExpectancy: 0}};
   }
 }
