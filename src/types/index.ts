@@ -5,12 +5,19 @@ export interface ProphetPredictionDate {
   probabilityProphet: number;
 }
 
+export interface CandidateRawType {
+  name: string;
+  dob: string;
+  ordinationDate: string;
+}
+
 export interface CandidateType {
   name: string;
   dob: Date;
-  callDate: Date;
+  ordinationDate: Date;
   seniorApostles: number[];
   dates: ProphetPredictionDate[];
+  id: string;
 }
 
 export interface ProphetPredictionType {
