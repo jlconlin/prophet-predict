@@ -19,6 +19,7 @@ export class ProphetPrediction implements ProphetPredictionType {
     this.loadRawCandidateData();
     this.calculateSeniorApostles();
     this.calculateCandidatesGranularLifeExpectancy();
+    this.calculateCandidatesProphetProbability();
   }
 
   loadRawCandidateData(): void {
@@ -44,5 +45,44 @@ export class ProphetPrediction implements ProphetPredictionType {
         this.actuarialLifeTable.dailyRates
       );
     });
+  }
+
+  calculateCandidatesProphetProbability(): void {
+    this.candidates.forEach((candidate: CandidateType) => {
+      this.calculateProphetProbability(candidate);
+    });
+  }
+
+  calculateProphetProbability(candidate: CandidateType): void {
+    for (let i = 1; i < 118 * 365 - candidate.ageDays; i++) {
+      const probabilitySeniorApostlesDead: number =
+        this.calculateProbabilitySeniorApostlesDead(
+          candidate.seniorApostles,
+          i
+        );
+      const probabilityProphet =
+        probabilitySeniorApostlesDead *
+        candidate.dailyLifeExpectancies[i].probabilityLiving;
+      candidate.dailyProphetProbabilities[i] = {
+        probabilityProphet,
+      };
+    }
+  }
+
+  calculateProbabilitySeniorApostlesDead(
+    seniorApostles: string[],
+    day: number
+  ): number {
+    let deadProbabilities: number[] = [];
+    seniorApostles.forEach((seniorApostleId: string) => {
+      const seniorApostle = this.candidates.find((candidate: CandidateType) => {
+        return candidate.id === seniorApostleId;
+      });
+      const probabilityDead =
+        seniorApostle?.dailyLifeExpectancies[day]?.probabilityDead || 1;
+      deadProbabilities.push(probabilityDead);
+    });
+    const result = deadProbabilities.reduce((a, b) => a * b, 1);
+    return result;
   }
 }

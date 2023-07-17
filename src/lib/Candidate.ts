@@ -1,5 +1,10 @@
 import {v4 as uuidv4} from 'uuid';
-import {CandidateType, CandidateRawType, DailyRatesType} from '@/types/index';
+import {
+  CandidateType,
+  CandidateRawType,
+  DailyRatesType,
+  dailyProphetProbabilitiesType,
+} from '@/types/index';
 
 export class Candidate implements CandidateType {
   id: string;
@@ -10,6 +15,7 @@ export class Candidate implements CandidateType {
   ordinationDate: Date;
   seniorApostles: string[];
   dailyLifeExpectancies: DailyRatesType;
+  dailyProphetProbabilities: dailyProphetProbabilitiesType;
 
   constructor(candidateRaw: CandidateRawType) {
     this.name = candidateRaw.name;
@@ -17,6 +23,7 @@ export class Candidate implements CandidateType {
     this.ordinationDate = new Date(candidateRaw.ordinationDate);
     this.seniorApostles = [];
     this.dailyLifeExpectancies = {};
+    this.dailyProphetProbabilities = {};
     this.id = uuidv4();
     this.calculateAges();
   }
