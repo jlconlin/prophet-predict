@@ -22,10 +22,10 @@ export class ActuarialLifeTable implements ActuarialLifeTableType {
     for (let year = 0; year <= 118; year++) {
       for (let day = 0; day <= 365; day++) {
         const ageDays = year * 365 + day;
-        const previousDeathProbability = this.raw[year].deathProbability;
-        const previousLifeExpectancy = this.raw[year].lifeExpectancy;
-        const nextDeathProbability = this.raw[year + 1].deathProbability;
-        const nextLifeExpectancy = this.raw[year + 1].lifeExpectancy;
+        const previousDeathProbability = this.raw[year].probabilityDead;
+        const previousLifeExpectancy = this.raw[year].probabilityLiving;
+        const nextDeathProbability = this.raw[year + 1].probabilityDead;
+        const nextLifeExpectancy = this.raw[year + 1].probabilityLiving;
 
         const deathProbability =
           previousDeathProbability +

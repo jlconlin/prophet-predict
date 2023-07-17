@@ -39,8 +39,8 @@ export interface CandidateRawType {
 }
 
 export interface ActuarialLifeTableAgeType {
-  deathProbability: number;
-  lifeExpectancy: number;
+  probabilityLiving: number;
+  probabilityDead: number;
 }
 export interface ActuarialLifeTableRawType {
   [key: number]: ActuarialLifeTableAgeType;

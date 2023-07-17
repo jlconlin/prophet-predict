@@ -3,7 +3,6 @@ import {
   CandidateType,
   CandidateRawType,
   DailyRates,
-  DailyRate,
   DailyLifeExpectanciesType,
 } from '@/types/index';
 
