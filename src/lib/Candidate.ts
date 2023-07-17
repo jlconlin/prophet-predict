@@ -2,7 +2,7 @@ import {v4 as uuidv4} from 'uuid';
 import {
   CandidateType,
   CandidateRawType,
-  DailyRates,
+  DailyRatesType,
   DailyLifeExpectanciesType,
 } from '@/types/index';
 
@@ -33,7 +33,7 @@ export class Candidate implements CandidateType {
     this.ageYears = Math.floor(this.ageDays / 365);
   }
 
-  calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
+  calculateDailyLifeExpectancies(actuarialLifeTable: DailyRatesType): void {
     for (let year: number = 0; year <= 118 - this.ageYears; year++) {
       this.calculateOneYearLifeExpectancy(year, actuarialLifeTable);
     }
@@ -41,7 +41,7 @@ export class Candidate implements CandidateType {
 
   calculateOneYearLifeExpectancy(
     year: number,
-    actuarialLifeTable: DailyRates
+    actuarialLifeTable: DailyRatesType
   ): void {
     const startDayOfYear = year * 365;
     const startProbabilityLiving = this.getStartProbabilityLiving(year);
@@ -71,12 +71,12 @@ export class Candidate implements CandidateType {
 
   calculateEndingProbabilityLiving(
     year: number,
-    actuarialLifeTable: DailyRates
+    actuarialLifeTable: DailyRatesType
   ): number {
     const livingProbabilities: number[] = [];
     for (let i = 0; i <= year; i++) {
       livingProbabilities.push(
-        1 - actuarialLifeTable[this.ageDays + i * 365].deathProbability
+        1 - actuarialLifeTable[this.ageDays + i * 365].probabilityDead
       );
     }
     return livingProbabilities.reduce((a, b) => a * b);

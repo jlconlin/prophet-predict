@@ -12,16 +12,23 @@ export interface CandidateType {
   ordinationDate: Date;
   seniorApostles: string[];
   dailyLifeExpectancies: DailyLifeExpectanciesType;
-  calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
+  calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRatesType) => void;
 }
 
-export interface DailyRates {
-  [key: number]: DailyRate;
+export interface ActuarialLifeTableRawEntryType {
+  probabilityDead: number;
+}
+export interface ActuarialLifeTableRawType {
+  [key: number]: ActuarialLifeTableRawEntryType;
 }
 
-export interface DailyRate {
-  deathProbability: number;
-  lifeExpectancy: number;
+export interface DailyRatesType {
+  [key: number]: DailyRateType;
+}
+
+export interface DailyRateType {
+  probabilityDead: number;
+  probabilityLiving: number;
 }
 
 export interface DailyLifeExpectanciesType {
@@ -38,15 +45,7 @@ export interface CandidateRawType {
   ordinationDate: string;
 }
 
-export interface ActuarialLifeTableAgeType {
-  probabilityLiving: number;
-  probabilityDead: number;
-}
-export interface ActuarialLifeTableRawType {
-  [key: number]: ActuarialLifeTableAgeType;
-}
-
 export interface ActuarialLifeTableType {
   raw: ActuarialLifeTableRawType;
-  dailyRates: DailyRates;
+  dailyRates: DailyRatesType;
 }
