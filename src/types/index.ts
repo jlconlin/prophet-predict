@@ -1,3 +1,8 @@
+export interface ProphetPredictionType {
+  candidates: CandidateType[];
+  actuarialLifeTable: ActuarialLifeTableType;
+}
+
 export interface DailyLifeExpectanciesType {
   [key: string]: DailyLifeExpectancy;
 }
@@ -24,11 +29,6 @@ export interface CandidateType {
   ageYears: number;
   loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
   calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
-}
-
-export interface ProphetPredictionType {
-  candidates: CandidateType[];
-  actuarialLifeTable: ActuarialLifeTableType;
 }
 
 export interface ActuarialLifeTableAgeType {

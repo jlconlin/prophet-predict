@@ -15,18 +15,14 @@ export class ProphetPrediction implements ProphetPredictionType {
 
   constructor() {
     this.candidates = [];
-    this.calculate();
     this.actuarialLifeTable = new ActuarialLifeTable();
+    this.loadRawCandidateData();
+    this.calculateSeniorApostles();
     this.loadCandidatesActuarialTableValues();
     this.calculateCandidatesGranularLifeExpectancy();
   }
 
-  calculate(): void {
-    this.loadRawData();
-    this.calculateSeniorApostles();
-  }
-
-  loadRawData(): void {
+  loadRawCandidateData(): void {
     candidatesRaw.forEach((candidate: CandidateRawType) => {
       this.candidates.push(new Candidate(candidate));
     });
