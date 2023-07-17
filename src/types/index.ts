@@ -3,6 +3,27 @@ export interface ProphetPredictionType {
   actuarialLifeTable: ActuarialLifeTableType;
 }
 
+export interface CandidateType {
+  id: string;
+  name: string;
+  birthDate: Date;
+  ageYears: number;
+  ageDays: number;
+  ordinationDate: Date;
+  seniorApostles: string[];
+  dailyLifeExpectancies: DailyLifeExpectanciesType;
+  calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
+}
+
+export interface DailyRates {
+  [key: number]: DailyRate;
+}
+
+export interface DailyRate {
+  deathProbability: number;
+  lifeExpectancy: number;
+}
+
 export interface DailyLifeExpectanciesType {
   [key: string]: DailyLifeExpectancy;
 }
@@ -17,20 +38,6 @@ export interface CandidateRawType {
   ordinationDate: string;
 }
 
-export interface CandidateType {
-  name: string;
-  birthDate: Date;
-  ordinationDate: Date;
-  seniorApostles: string[];
-  id: string;
-  ageDays: number;
-  actuarialTable: DailyRate;
-  dailyLifeExpectancies: DailyLifeExpectanciesType;
-  ageYears: number;
-  loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
-  calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
-}
-
 export interface ActuarialLifeTableAgeType {
   deathProbability: number;
   lifeExpectancy: number;
@@ -42,13 +49,4 @@ export interface ActuarialLifeTableRawType {
 export interface ActuarialLifeTableType {
   raw: ActuarialLifeTableRawType;
   dailyRates: DailyRates;
-}
-
-export interface DailyRate {
-  deathProbability: number;
-  lifeExpectancy: number;
-}
-
-export interface DailyRates {
-  [key: number]: DailyRate;
 }

@@ -8,15 +8,14 @@ import {
 } from '@/types/index';
 
 export class Candidate implements CandidateType {
+  id: string;
   name: string;
   birthDate: Date;
+  ageDays!: number;
+  ageYears!: number;
   ordinationDate: Date;
   seniorApostles: string[];
   dailyLifeExpectancies: DailyLifeExpectanciesType;
-  ageYears: number;
-  id: string;
-  ageDays!: number;
-  actuarialTable!: DailyRate;
 
   constructor(candidateRaw: CandidateRawType) {
     this.name = candidateRaw.name;
@@ -25,18 +24,14 @@ export class Candidate implements CandidateType {
     this.seniorApostles = [];
     this.dailyLifeExpectancies = {};
     this.id = uuidv4();
-    this.calculateageDays();
-    this.ageYears = Math.floor(this.ageDays / 365);
+    this.calculateAges();
   }
 
-  calculateageDays(): void {
+  calculateAges(): void {
     this.ageDays = Math.floor(
       (new Date().getTime() - this.birthDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-  }
-
-  loadActuarialTableValues(actuarialLifeTable: DailyRates): void {
-    this.actuarialTable = actuarialLifeTable[this.ageDays];
+    this.ageYears = Math.floor(this.ageDays / 365);
   }
 
   calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
@@ -59,10 +54,10 @@ export class Candidate implements CandidateType {
       (startProbabilityLiving - endingProbabilityLiving) / 365;
 
     for (let dayOfYear = 0; dayOfYear <= 365; dayOfYear++) {
-      const totalageDays = startDayOfYear + dayOfYear;
+      const totalAgeDays = startDayOfYear + dayOfYear;
       const probabilityLiving =
         startProbabilityLiving - dayOfYear * livingIncrement;
-      this.dailyLifeExpectancies[totalageDays] = {
+      this.dailyLifeExpectancies[totalAgeDays] = {
         probabilityLiving,
         probabilityDead: 1 - probabilityLiving,
       };
