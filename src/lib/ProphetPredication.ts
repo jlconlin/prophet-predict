@@ -17,6 +17,7 @@ export class ProphetPrediction implements ProphetPredictionType {
     this.candidates = [];
     this.actuarialLifeTable = new ActuarialLifeTable();
     this.loadRawCandidateData();
+    this.sortCandidatesByOrdinationDate();
     this.calculateSeniorApostles();
     this.calculateCandidatesGranularLifeExpectancy();
     this.calculateCandidatesProphetProbability();
@@ -25,6 +26,12 @@ export class ProphetPrediction implements ProphetPredictionType {
   loadRawCandidateData(): void {
     candidatesRaw.forEach((candidate: CandidateRawType) => {
       this.candidates.push(new Candidate(candidate));
+    });
+  }
+
+  sortCandidatesByOrdinationDate(): void {
+    this.candidates.sort((a: CandidateType, b: CandidateType) => {
+      return b.ordinationDate.getTime() - a.ordinationDate.getTime();
     });
   }
 
