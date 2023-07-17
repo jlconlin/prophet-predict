@@ -15,7 +15,7 @@ export class Candidate implements CandidateType {
   dailyLifeExpectancies: DailyLifeExpectanciesType;
   ageYears: number;
   id: string;
-  daysSinceBirth!: number;
+  ageDays!: number;
   actuarialTable!: DailyRate;
 
   constructor(candidateRaw: CandidateRawType) {
@@ -25,18 +25,18 @@ export class Candidate implements CandidateType {
     this.seniorApostles = [];
     this.dailyLifeExpectancies = {};
     this.id = uuidv4();
-    this.calculateDaysSinceBirth();
-    this.ageYears = Math.floor(this.daysSinceBirth / 365);
+    this.calculateageDays();
+    this.ageYears = Math.floor(this.ageDays / 365);
   }
 
-  calculateDaysSinceBirth(): void {
-    this.daysSinceBirth = Math.floor(
+  calculateageDays(): void {
+    this.ageDays = Math.floor(
       (new Date().getTime() - this.dob.getTime()) / (1000 * 60 * 60 * 24)
     );
   }
 
   loadActuarialTableValues(actuarialLifeTable: DailyRates): void {
-    this.actuarialTable = actuarialLifeTable[this.daysSinceBirth];
+    this.actuarialTable = actuarialLifeTable[this.ageDays];
   }
 
   calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
@@ -59,10 +59,10 @@ export class Candidate implements CandidateType {
       (startProbabilityLiving - endingProbabilityLiving) / 365;
 
     for (let dayOfYear = 0; dayOfYear <= 365; dayOfYear++) {
-      const totalDaysSinceBirth = startDayOfYear + dayOfYear;
+      const totalageDays = startDayOfYear + dayOfYear;
       const probabilityLiving =
         startProbabilityLiving - dayOfYear * livingIncrement;
-      this.dailyLifeExpectancies[totalDaysSinceBirth] = {
+      this.dailyLifeExpectancies[totalageDays] = {
         probabilityLiving,
         probabilityDead: 1 - probabilityLiving,
       };
@@ -82,7 +82,7 @@ export class Candidate implements CandidateType {
     const livingProbabilities: number[] = [];
     for (let i = 0; i <= year; i++) {
       livingProbabilities.push(
-        1 - actuarialLifeTable[this.daysSinceBirth + i * 365].deathProbability
+        1 - actuarialLifeTable[this.ageDays + i * 365].deathProbability
       );
     }
     return livingProbabilities.reduce((a, b) => a * b);

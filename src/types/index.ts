@@ -23,7 +23,7 @@ export interface CandidateType {
   ordinationDate: Date;
   seniorApostles: string[];
   id: string;
-  daysSinceBirth: number;
+  ageDays: number;
   actuarialTable: DailyRate;
   dailyLifeExpectancies: DailyLifeExpectanciesType;
   ageYears: number;
