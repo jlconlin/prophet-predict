@@ -9,7 +9,7 @@ import {
 
 export class Candidate implements CandidateType {
   name: string;
-  dob: Date;
+  birthDate: Date;
   ordinationDate: Date;
   seniorApostles: string[];
   dailyLifeExpectancies: DailyLifeExpectanciesType;
@@ -20,7 +20,7 @@ export class Candidate implements CandidateType {
 
   constructor(candidateRaw: CandidateRawType) {
     this.name = candidateRaw.name;
-    this.dob = new Date(candidateRaw.dob);
+    this.birthDate = new Date(candidateRaw.dob);
     this.ordinationDate = new Date(candidateRaw.ordinationDate);
     this.seniorApostles = [];
     this.dailyLifeExpectancies = {};
@@ -31,7 +31,7 @@ export class Candidate implements CandidateType {
 
   calculateageDays(): void {
     this.ageDays = Math.floor(
-      (new Date().getTime() - this.dob.getTime()) / (1000 * 60 * 60 * 24)
+      (new Date().getTime() - this.birthDate.getTime()) / (1000 * 60 * 60 * 24)
     );
   }
 

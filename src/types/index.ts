@@ -19,7 +19,7 @@ export interface CandidateRawType {
 
 export interface CandidateType {
   name: string;
-  dob: Date;
+  birthDate: Date;
   ordinationDate: Date;
   seniorApostles: string[];
   id: string;
