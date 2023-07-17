@@ -21,6 +21,7 @@ export interface CandidateType {
   daysSinceBirth: number;
   actuarialTable: DailyRate;
   dailyLifeExpectancies: DailyLifeExpectanciesType;
+  ageYears: number;
   loadActuarialTableValues: (actuarialLifeTable: DailyRates) => void;
   calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRates) => void;
 }
