@@ -1,10 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import {
-  CandidateType,
-  CandidateRawType,
-  DailyRatesType,
-  DailyLifeExpectanciesType,
-} from '@/types/index';
+import {CandidateType, CandidateRawType, DailyRatesType} from '@/types/index';
 
 export class Candidate implements CandidateType {
   id: string;
@@ -14,7 +9,7 @@ export class Candidate implements CandidateType {
   ageYears!: number;
   ordinationDate: Date;
   seniorApostles: string[];
-  dailyLifeExpectancies: DailyLifeExpectanciesType;
+  dailyLifeExpectancies: DailyRatesType;
 
   constructor(candidateRaw: CandidateRawType) {
     this.name = candidateRaw.name;
