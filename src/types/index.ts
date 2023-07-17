@@ -50,3 +50,11 @@ export interface dailyProphetProbabilitiesType {
 export interface dailyProphetProbabilityType {
   probabilityProphet: number;
 }
+
+export interface graphDataType {
+  id: string;
+  data: {
+    x: string;
+    y: number;
+  }[];
+}
