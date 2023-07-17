@@ -40,8 +40,7 @@ export class Candidate implements CandidateType {
   }
 
   calculateDailyLifeExpectancies(actuarialLifeTable: DailyRates): void {
-    for (let i: number = this.ageYears; i <= 118; i++) {
-      const year: number = i - this.ageYears;
+    for (let year: number = 0; year <= 118 - this.ageYears; year++) {
       this.calculateOneYearLifeExpectancy(year, actuarialLifeTable);
     }
   }
@@ -50,33 +49,30 @@ export class Candidate implements CandidateType {
     year: number,
     actuarialLifeTable: DailyRates
   ): void {
-    let startingProbabilityLiving: number;
-    if (year === 0) {
-      startingProbabilityLiving = 1;
-    } else {
-      startingProbabilityLiving =
-        this.dailyLifeExpectancies[year * 365].probabilityLiving;
-    }
-    let endingProbabilityLiving: number = this.calculateEndingProbabilityLiving(
+    const startDayOfYear = year * 365;
+    const startProbabilityLiving = this.getStartProbabilityLiving(year);
+    const endingProbabilityLiving = this.calculateEndingProbabilityLiving(
       year,
       actuarialLifeTable
     );
-    let probabilityLivingDifference: number =
-      startingProbabilityLiving - endingProbabilityLiving;
-    let livingIncrement: number = probabilityLivingDifference / 365;
+    const livingIncrement =
+      (startProbabilityLiving - endingProbabilityLiving) / 365;
 
-    for (let i = year * 365; i <= 365 * year + 365; i++) {
-      const daysSinceStartOfCurrentYear = i - year * 365;
-      this.dailyLifeExpectancies[i] = {
-        probabilityLiving:
-          startingProbabilityLiving -
-          daysSinceStartOfCurrentYear * livingIncrement,
-        probabilityDead:
-          1 -
-          (startingProbabilityLiving -
-            daysSinceStartOfCurrentYear * livingIncrement),
+    for (let dayOfYear = 0; dayOfYear <= 365; dayOfYear++) {
+      const totalDaysSinceBirth = startDayOfYear + dayOfYear;
+      const probabilityLiving =
+        startProbabilityLiving - dayOfYear * livingIncrement;
+      this.dailyLifeExpectancies[totalDaysSinceBirth] = {
+        probabilityLiving,
+        probabilityDead: 1 - probabilityLiving,
       };
     }
+  }
+
+  getStartProbabilityLiving(year: number): number {
+    return year === 0
+      ? 1
+      : this.dailyLifeExpectancies[year * 365].probabilityLiving;
   }
 
   calculateEndingProbabilityLiving(
@@ -89,7 +85,6 @@ export class Candidate implements CandidateType {
         1 - actuarialLifeTable[this.daysSinceBirth + i * 365].deathProbability
       );
     }
-    const returnValue = livingProbabilities.reduce((a, b) => a * b);
-    return returnValue;
+    return livingProbabilities.reduce((a, b) => a * b);
   }
 }
