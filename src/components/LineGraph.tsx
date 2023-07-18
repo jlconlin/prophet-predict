@@ -40,7 +40,7 @@ export default function LineGraph({
           tickPadding: 5,
           tickRotation: 0,
           format: timeFormat('%Y'),
-          legend: 'year',
+          legend: 'Year',
           legendOffset: 36,
           legendPosition: 'middle',
         }}
