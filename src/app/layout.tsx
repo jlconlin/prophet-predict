@@ -3,6 +3,7 @@ import '@/styles/styles.scss';
 import type {Metadata} from 'next';
 import {Analytics} from '@vercel/analytics/react';
 import {Inter} from 'next/font/google';
+import GoogleTagManager from '@/components/scripts/GoogleTagManager';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -36,6 +37,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={inter.className}>
         {children}
         <Analytics />
+        <GoogleTagManager />
       </body>
     </html>
   );
