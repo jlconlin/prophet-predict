@@ -15,17 +15,11 @@ export default function Home(): JSX.Element {
     getResults();
   }, []);
 
-  useEffect(() => {
-    console.log('debug1', results);
-  }, [results]);
+  if (!results) return <></>;
 
   return (
     <div>
-      {results && (
-        <>
-          <LineGraph data={results} />
-        </>
-      )}
+      <LineGraph data={results} />
     </div>
   );
 }
