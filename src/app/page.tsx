@@ -2,7 +2,7 @@
 
 import {useState, useEffect} from 'react';
 import LineGraph from '@/components/LineGraph';
-import {ProphetPredictionType, graphDataType} from '@/types/index';
+import {graphDataType} from '@/types/index';
 
 export default function Home(): JSX.Element {
   const [results, setResults] = useState<graphDataType[] | null>(null);
