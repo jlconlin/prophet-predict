@@ -51,27 +51,27 @@
   },
   {
     "name": "Ronald A. Rasband",
-    "ordinationDate": "2015-10-03",
+    "ordinationDate": "2015-10-03T09:00:00Z",
     "dob": "1951-02-06"
   },
   {
     "name": "Gary E. Stevenson",
-    "ordinationDate": "2015-10-03",
+    "ordinationDate": "2015-10-03T09:10:00Z",
     "dob": "1955-08-06"
   },
   {
     "name": "Dale G. Renlund",
-    "ordinationDate": "2015-10-03",
+    "ordinationDate": "2015-10-03T09:20:00Z",
     "dob": "1952-11-13"
   },
   {
     "name": "Gerrit W. Gong",
-    "ordinationDate": "2018-03-31",
+    "ordinationDate": "2018-03-31T09:00:00Z",
     "dob": "1953-12-23"
   },
   {
     "name": "Ulisses Soares",
-    "ordinationDate": "2018-03-31",
+    "ordinationDate": "2018-03-31T09:10:00Z",
     "dob": "1958-10-02"
   }
 ]
