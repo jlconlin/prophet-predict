@@ -97,6 +97,9 @@ export default function LineGraph({
           const formattedDate = new Date(pointData.x).toLocaleDateString();
           const formattedValue = format('.2%')(Number(pointData.y));
           const formattedAge = pointData.age;
+          const formattedOrdinationDate = new Date(
+            pointData.ordinationDate
+          ).toLocaleDateString();
 
           return (
             <div
@@ -109,6 +112,8 @@ export default function LineGraph({
               <strong>{point.serieId}</strong>
               <br />
               Age: {formattedAge}
+              <br />
+              Ordination date: {formattedOrdinationDate}
               <br />
               Date: {formattedDate}
               <br />

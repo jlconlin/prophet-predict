@@ -99,7 +99,8 @@ export class ProphetPrediction implements ProphetPredictionType {
     const graphData: graphDataType[] = [];
     const today: Date = new Date();
     for (const candidate of this.candidates) {
-      const data: {x: string; y: number; age: number}[] = [];
+      const data: {x: string; y: number; age: number; ordinationDate: Date}[] =
+        [];
       const daysToRender = 30 * 365;
       for (let i = 1; i < daysToRender; i++) {
         if (!(i === 1 || i % 90 === 0)) continue;
@@ -109,6 +110,7 @@ export class ProphetPrediction implements ProphetPredictionType {
           x: futureDate.toISOString().split('T')[0],
           y: candidate.dailyProphetProbabilities[i].probabilityProphet,
           age: candidate.calculateAge(futureDate),
+          ordinationDate: candidate.ordinationDate,
         });
       }
       graphData.push({

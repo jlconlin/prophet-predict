@@ -62,6 +62,7 @@ export interface graphDataType {
     x: string;
     y: number;
     age: number;
+    ordinationDate: Date;
   }[];
 }
 
@@ -72,4 +73,5 @@ export interface graphDataPointType {
   yFormatted: string | number;
   yStacked?: number | undefined;
   age: number;
+  ordinationDate: Date;
 }
