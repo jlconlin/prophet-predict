@@ -1,3 +1,5 @@
+import {DatumValue} from '@nivo/core';
+
 export interface ProphetPredictionType {
   candidates: CandidateType[];
   actuarialLifeTable: ActuarialLifeTableType;
@@ -15,6 +17,7 @@ export interface CandidateType {
   dailyLifeExpectancies: DailyRatesType;
   dailyProphetProbabilities: dailyProphetProbabilitiesType;
   calculateDailyLifeExpectancies: (actuarialLifeTable: DailyRatesType) => void;
+  calculateAge: (date: Date) => number;
 }
 
 export interface ActuarialLifeTableRawEntryType {
@@ -58,5 +61,15 @@ export interface graphDataType {
   data: {
     x: string;
     y: number;
+    age: number;
   }[];
+}
+
+export interface graphDataPointType {
+  x: DatumValue;
+  xFormatted: string | number;
+  y: DatumValue;
+  yFormatted: string | number;
+  yStacked?: number | undefined;
+  age: number;
 }

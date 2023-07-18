@@ -3,7 +3,7 @@ import {timeYear} from 'd3-time';
 import {timeFormat} from 'd3-time-format';
 import {format} from 'd3-format';
 import styles from './LineGraph.module.scss';
-import {graphDataType} from '@/types';
+import {graphDataType, graphDataPointType} from '@/types';
 
 export default function LineGraph({
   data,
@@ -93,8 +93,10 @@ export default function LineGraph({
           },
         ]}
         tooltip={({point}) => {
-          const formattedDate = new Date(point.data.x).toLocaleDateString();
-          const formattedValue = format('.2%')(Number(point.data.y));
+          const pointData = point.data as graphDataPointType;
+          const formattedDate = new Date(pointData.x).toLocaleDateString();
+          const formattedValue = format('.2%')(Number(pointData.y));
+          const formattedAge = pointData.age;
 
           return (
             <div
@@ -105,6 +107,8 @@ export default function LineGraph({
               }}
             >
               <strong>{point.serieId}</strong>
+              <br />
+              Age: {formattedAge}
               <br />
               Date: {formattedDate}
               <br />

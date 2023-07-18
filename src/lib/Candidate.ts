@@ -35,6 +35,12 @@ export class Candidate implements CandidateType {
     this.ageYears = Math.floor(this.ageDays / 365);
   }
 
+  calculateAge(date: Date): number {
+    return Math.floor(
+      (date.getTime() - this.birthDate.getTime()) / (1000 * 60 * 60 * 24 * 365)
+    );
+  }
+
   calculateDailyLifeExpectancies(actuarialLifeTable: DailyRatesType): void {
     for (let year: number = 0; year <= 118 - this.ageYears; year++) {
       this.calculateOneYearLifeExpectancy(year, actuarialLifeTable);
