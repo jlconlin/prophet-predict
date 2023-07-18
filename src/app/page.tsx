@@ -26,7 +26,8 @@ export default function Home(): JSX.Element {
     const today: Date = new Date();
     for (const candidate of results.candidates) {
       const data: {x: string; y: number}[] = [];
-      for (let i = 1; i < 6000; i++) {
+      const daysToRender = 30 * 365;
+      for (let i = 1; i < daysToRender; i++) {
         if (!(i === 1 || i % 90 === 0)) continue;
         let futureDate = new Date(today);
         futureDate.setDate(today.getDate() + i);

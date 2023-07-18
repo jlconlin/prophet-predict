@@ -61,7 +61,8 @@ export class ProphetPrediction implements ProphetPredictionType {
   }
 
   calculateProphetProbability(candidate: CandidateType): void {
-    for (let i = 1; i < 118 * 365 - candidate.ageDays; i++) {
+    let daysToCalculate: number = 50 * 365;
+    for (let i = 1; i < daysToCalculate; i++) {
       const probabilitySeniorApostlesDead: number =
         this.calculateProbabilitySeniorApostlesDead(
           candidate.seniorApostles,
@@ -69,7 +70,7 @@ export class ProphetPrediction implements ProphetPredictionType {
         );
       const probabilityProphet =
         probabilitySeniorApostlesDead *
-        candidate.dailyLifeExpectancies[i].probabilityLiving;
+          candidate.dailyLifeExpectancies[i]?.probabilityLiving || 0;
       candidate.dailyProphetProbabilities[i] = {
         probabilityProphet,
       };
