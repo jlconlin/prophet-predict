@@ -1,6 +1,7 @@
 export interface ProphetPredictionType {
   candidates: CandidateType[];
   actuarialLifeTable: ActuarialLifeTableType;
+  returnGraphData: () => graphDataType[];
 }
 
 export interface CandidateType {

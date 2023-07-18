@@ -3,6 +3,7 @@ import {
   CandidateRawType,
   CandidateType,
   ActuarialLifeTableType,
+  graphDataType,
 } from '@/types/index';
 import {Candidate} from './Candidate';
 import {ActuarialLifeTable} from './ActuarialLifeTable';
@@ -92,5 +93,32 @@ export class ProphetPrediction implements ProphetPredictionType {
     });
     const result = deadProbabilities.reduce((a, b) => a * b, 1);
     return result;
+  }
+
+  returnGraphData(): graphDataType[] {
+    const graphData: graphDataType[] = [];
+    const today: Date = new Date();
+    for (const candidate of this.candidates) {
+      const data: {x: string; y: number}[] = [];
+      const daysToRender = 30 * 365;
+      for (let i = 1; i < daysToRender; i++) {
+        if (!(i === 1 || i % 90 === 0)) continue;
+        let futureDate = new Date(today);
+        futureDate.setDate(today.getDate() + i);
+        data.push({
+          x: futureDate.toISOString().split('T')[0],
+          y: candidate.dailyProphetProbabilities[i].probabilityProphet,
+        });
+      }
+      graphData.push({
+        id: candidate.name,
+        ordinationDate: new Date(candidate.ordinationDate),
+        data,
+      });
+      graphData.sort((a: any, b: any) => {
+        return b.ordinationDate.getTime() - a.ordinationDate.getTime();
+      });
+    }
+    return graphData;
   }
 }
