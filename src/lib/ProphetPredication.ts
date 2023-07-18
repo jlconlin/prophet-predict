@@ -31,7 +31,7 @@ export class ProphetPrediction implements ProphetPredictionType {
 
   sortCandidatesByOrdinationDate(): void {
     this.candidates.sort((a: CandidateType, b: CandidateType) => {
-      return b.ordinationDate.getTime() - a.ordinationDate.getTime();
+      return a.ordinationDate.getTime() - b.ordinationDate.getTime();
     });
   }
 

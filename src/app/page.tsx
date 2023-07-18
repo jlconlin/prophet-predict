@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     if (!results?.candidates) return;
-    const tempGraphData: any = [];
+    const tempGraphData: graphDataType[] = [];
     const today: Date = new Date();
     for (const candidate of results.candidates) {
       const data: {x: string; y: number}[] = [];
@@ -38,7 +38,11 @@ export default function Home(): JSX.Element {
       }
       tempGraphData.push({
         id: candidate.name,
+        ordinationDate: new Date(candidate.ordinationDate),
         data,
+      });
+      tempGraphData.sort((a: any, b: any) => {
+        return b.ordinationDate.getTime() - a.ordinationDate.getTime();
       });
     }
     console.log('debug2', tempGraphData);

@@ -53,6 +53,7 @@ export interface dailyProphetProbabilityType {
 
 export interface graphDataType {
   id: string;
+  ordinationDate: Date;
   data: {
     x: string;
     y: number;
