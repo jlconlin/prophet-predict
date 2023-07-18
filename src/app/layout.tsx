@@ -1,6 +1,6 @@
 import '@/styles/styles.scss';
 import type {Metadata} from 'next';
-import {Analytics} from '@vercel/analytics';
+import {Analytics} from '@vercel/analytics/react';
 import {Inter} from 'next/font/google';
 
 const inter = Inter({subsets: ['latin']});
