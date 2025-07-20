@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@nivo/line": "^0.88.0",
-    "@types/node": "20.4.1",
+    "@types/node": "22.x",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "@vercel/analytics": "^1.0.1",
@@ -18,7 +18,7 @@
     "d3-time-format": "^4.1.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
-    "next": "^13.5.8",
+    "next": "^15.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.63.6",
