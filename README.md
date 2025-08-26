@@ -1,4 +1,4 @@
-This repository uses actuarial tables to show the probability that a senior leadership member of [The Church of Jesus Christ of Latter-day Saints](https://churchofjesuschrist.org) will be come the President of the Church, i.e., the prophet. This does *not* take into account the actual of of any individual.
+This repository uses actuarial tables to show the probability that a senior leadership member of [The Church of Jesus Christ of Latter-day Saints](https://churchofjesuschrist.org) will be come the President of the Church, i.e., the prophet. This does *not* take into account the actual health of any individual.
 
 Note this is all for fun.
 
