@@ -30,18 +30,9 @@ export default function Home(): JSX.Element {
   if (!results) return <div>Error loading data</div>;
 
   return (
-    <div
-      style={{
-        padding: '0',
-        margin: '0',
-        overflow: 'hidden',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <div className="p-0 m-0 overflow-hidden h-screen flex flex-col">
       <Header />
-      <div style={{flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0}}>
+      <div className="flex-1 flex flex-col min-h-0">
         <LineGraph data={results} />
         <MobileLegend data={results} />
       </div>

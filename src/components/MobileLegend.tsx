@@ -1,4 +1,3 @@
-import styles from './MobileLegend.module.scss';
 import {graphDataType} from '@/types';
 
 export default function MobileLegend({
@@ -31,21 +30,21 @@ export default function MobileLegend({
   );
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>Candidates</h3>
-      <div className={styles.legendGrid}>
+    <div className="p-4 bg-gray-50 border-t border-gray-200 overflow-y-auto flex-shrink-0 md:hidden">
+      <h3 className="text-base font-semibold m-0 mb-3 text-gray-800">Candidates</h3>
+      <div className="grid grid-flow-col auto-rows-auto grid-rows-[repeat(7,auto)] grid-cols-2 gap-2 sm:grid-rows-[repeat(5,auto)] sm:grid-cols-3">
         {sortedData.map((item) => {
           // Find the original index to get the correct color
           const originalIndex = data.findIndex((d) => d.id === item.id);
           return (
-            <div key={item.id} className={styles.legendItem}>
+            <div key={item.id} className="flex items-center gap-2 text-2xs">
               <div
-                className={styles.colorDot}
+                className="w-[10px] h-[10px] rounded-full flex-shrink-0"
                 style={{
                   backgroundColor: colors[originalIndex % colors.length],
                 }}
               />
-              <span className={styles.name}>{item.id}</span>
+              <span className="text-gray-700 leading-tight text-2xs">{item.id}</span>
             </div>
           );
         })}

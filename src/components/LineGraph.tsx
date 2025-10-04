@@ -2,7 +2,6 @@ import {ResponsiveLine} from '@nivo/line';
 import {timeYear} from 'd3-time';
 import {timeFormat} from 'd3-time-format';
 import {format} from 'd3-format';
-import styles from './LineGraph.module.scss';
 import {graphDataType, graphDataPointType} from '@/types';
 import {useState, useEffect} from 'react';
 
@@ -35,7 +34,7 @@ export default function LineGraph({
   );
 
   return (
-    <div className={styles.container}>
+    <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px]">
       <ResponsiveLine
         data={data}
         margin={
@@ -131,13 +130,7 @@ export default function LineGraph({
           ).toLocaleDateString();
 
           return (
-            <div
-              style={{
-                backgroundColor: 'white',
-                padding: '10px',
-                border: '1px solid #ccc',
-              }}
-            >
+            <div className="bg-white p-3 border border-gray-300">
               <strong>{point.serieId}</strong>
               <br />
               Age: {formattedAge}
