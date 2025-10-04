@@ -40,8 +40,8 @@ export default function Header(): JSX.Element {
       </header>
 
       {showInfo && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-start justify-center md:items-end md:justify-center z-[1000] p-8 md:p-0 overflow-y-auto animate-fadeIn">
-          <div className="bg-white rounded-2xl md:rounded-t-2xl md:rounded-b-none p-10 md:p-8 max-w-[650px] w-full max-h-[calc(100vh-4rem)] md:max-h-[90vh] my-8 md:my-0 overflow-y-auto overflow-x-hidden relative shadow-2xl animate-fadeInSlow md:animate-slideUp custom-scrollbar">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center md:items-end z-[1000] py-8 px-8 md:p-0 overflow-y-auto animate-fadeIn">
+          <div className="bg-white rounded-2xl md:rounded-t-2xl md:rounded-b-none p-10 md:p-8 max-w-[650px] w-full max-h-full md:max-h-[90vh] overflow-y-auto overflow-x-hidden relative shadow-2xl animate-fadeInSlow md:animate-slideUp custom-scrollbar">
             <button
               className="absolute top-8 right-8 md:top-6 md:right-6 bg-gray-100 border-none rounded-lg w-8 h-8 text-6xl text-gray-500 cursor-pointer flex items-center justify-center leading-none transition-all duration-200 hover:bg-gray-200 hover:text-gray-800"
               onClick={() => setShowInfo(false)}
