@@ -1,6 +1,7 @@
 'use client';
 
 import {useState, useEffect} from 'react';
+import Header from '@/components/Header';
 import LineGraph from '@/components/LineGraph';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import MobileLegend from '@/components/MobileLegend';
@@ -39,8 +40,11 @@ export default function Home(): JSX.Element {
         flexDirection: 'column',
       }}
     >
-      <LineGraph data={results} />
-      <MobileLegend data={results} />
+      <Header />
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0}}>
+        <LineGraph data={results} />
+        <MobileLegend data={results} />
+      </div>
     </div>
   );
 }

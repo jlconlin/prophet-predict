@@ -1,21 +1,20 @@
 .container {
   width: 100%;
+  flex: 1;
+  min-height: 0;
 
   // Mobile: optimize for screen space
   @media (max-width: 768px) {
-    height: 50vh;
-    min-height: 300px;
+    min-height: 250px;
   }
 
   // Tablet
   @media (min-width: 769px) and (max-width: 1024px) {
-    height: 60vh;
-    min-height: 450px;
+    min-height: 400px;
   }
 
   // Desktop
   @media (min-width: 1025px) {
-    height: calc(100vh - 6rem);
     min-height: 500px;
     min-width: 800px;
   }
