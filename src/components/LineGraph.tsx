@@ -26,17 +26,26 @@ export default function LineGraph({
 
   if (!data) return <></>;
   if (!data[0]) return <></>;
+
+  // Sort data by ordination date (oldest/longest serving first)
+  // Reversed for nivo legend which displays bottom-to-top
+  const sortedData = [...data].sort(
+    (a, b) =>
+      new Date(b.ordinationDate).getTime() -
+      new Date(a.ordinationDate).getTime()
+  );
+
   const timeYearResult = timeYear.every(1);
   if (!timeYearResult?.range) return <></>;
   const tickValuesAxisBottom = timeYearResult.range(
-    new Date(data[0].data[0].x),
-    new Date(data[0].data[data[0].data.length - 1].x)
+    new Date(sortedData[0].data[0].x),
+    new Date(sortedData[0].data[sortedData[0].data.length - 1].x)
   );
 
   return (
     <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px]">
       <ResponsiveLine
-        data={data}
+        data={sortedData}
         margin={
           isMobile
             ? {top: 10, right: 10, bottom: 40, left: 40}
