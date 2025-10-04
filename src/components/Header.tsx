@@ -54,14 +54,14 @@ export default function Header(): JSX.Element {
             <section className={styles.section}>
               <h3>Methodology</h3>
               <p>
-                This tool calculates the probability that each apostle will
-                become the next President (Prophet) of The Church of Jesus
-                Christ of Latter-day Saints based on:
+                This tool calculates each apostle&apos;s probability of being
+                the President (Prophet) of The Church of Jesus Christ of
+                Latter-day Saints at a given point in time, based on:
               </p>
               <ul>
                 <li>
-                  <strong>Actuarial life tables:</strong> Standard mortality
-                  data by age
+                  <strong>Actuarial life tables:</strong> Mortality data by age
+                  from the Social Security Administration (SSA)
                 </li>
                 <li>
                   <strong>Seniority rules:</strong> The most senior apostle
@@ -72,57 +72,47 @@ export default function Header(): JSX.Element {
                   for each day over 30 years
                 </li>
               </ul>
-              <p className={styles.note}>
-                <strong>Formula:</strong> P(apostle becomes prophet on day N) =
-                P(all senior apostles deceased) × P(apostle still living)
-              </p>
+              <div className={styles.note}>
+                <p>
+                  <strong>The Formula</strong>
+                </p>
+                <p>
+                  For each apostle, we calculate the probability they will be
+                  serving as President on any given day. This requires two
+                  conditions to be met:
+                </p>
+                <p>
+                  1. All apostles senior to them (by ordination date) have
+                  passed away
+                  <br />
+                  2. The apostle themselves is still living
+                </p>
+                <p>
+                  The probability is the product of these two independent
+                  events, calculated using actuarial data published by the
+                  Social Security Administration for each apostle&apos;s age.
+                </p>
+              </div>
             </section>
 
             <section className={styles.section}>
               <h3>Key Assumptions</h3>
-              <ul>
+              <ul className={styles.list}>
                 <li>Succession follows strict seniority by ordination date</li>
                 <li>No early resignations or unforeseen circumstances</li>
                 <li>
                   Actuarial tables represent average mortality (individual
                   health varies)
                 </li>
-                <li>Current apostles remain in their positions</li>
-              </ul>
-            </section>
-
-            <section className={styles.section}>
-              <h3>Historical Context</h3>
-              <ul>
-                <li>
-                  <strong>Average age at appointment:</strong> ~64 years (last 5
-                  prophets)
-                </li>
-                <li>
-                  <strong>Average tenure:</strong> ~9 years (last 5 prophets)
-                </li>
-                <li>
-                  <strong>Oldest to serve:</strong> Gordon B. Hinckley (97 at
-                  passing)
-                </li>
-                <li>
-                  <strong>Youngest appointed:</strong> Joseph Smith (38 years
-                  old)
-                </li>
-                <li>
-                  <strong>Succession rule:</strong> Established in 1844,
-                  followed without exception
-                </li>
               </ul>
             </section>
 
             <section className={styles.section}>
               <h3>Limitations</h3>
-              <ul>
+              <ul className={styles.list}>
                 <li>Statistical model only - many factors cannot be predicted</li>
                 <li>Individual health conditions not accounted for</li>
                 <li>Does not predict exact outcomes, only probabilities</li>
-                <li>Future apostle appointments will change projections</li>
               </ul>
             </section>
 
@@ -131,10 +121,10 @@ export default function Header(): JSX.Element {
               <p>
                 Ordination dates and birth dates are publicly available
                 information. Actuarial life tables are based on standard U.S.
-                mortality data.
+                mortality data for males from the Social Security Administration.
               </p>
               <p className={styles.note}>
-                Last updated: October 2025
+                Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               </p>
             </section>
           </div>
