@@ -3,6 +3,7 @@
 import {useState, useEffect} from 'react';
 import LineGraph from '@/components/LineGraph';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import MobileLegend from '@/components/MobileLegend';
 import {graphDataType} from '@/types/index';
 
 export default function Home(): JSX.Element {
@@ -28,8 +29,18 @@ export default function Home(): JSX.Element {
   if (!results) return <div>Error loading data</div>;
 
   return (
-    <div>
+    <div
+      style={{
+        padding: '0',
+        margin: '0',
+        overflow: 'hidden',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <LineGraph data={results} />
+      <MobileLegend data={results} />
     </div>
   );
 }

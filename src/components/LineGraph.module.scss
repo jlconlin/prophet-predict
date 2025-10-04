@@ -1,5 +1,22 @@
 .container {
-  height: calc(100vh - 6rem);
   width: 100%;
-  min-width: 100rem;
+
+  // Mobile: optimize for screen space
+  @media (max-width: 768px) {
+    height: 50vh;
+    min-height: 300px;
+  }
+
+  // Tablet
+  @media (min-width: 769px) and (max-width: 1024px) {
+    height: 60vh;
+    min-height: 450px;
+  }
+
+  // Desktop
+  @media (min-width: 1025px) {
+    height: calc(100vh - 6rem);
+    min-height: 500px;
+    min-width: 800px;
+  }
 }

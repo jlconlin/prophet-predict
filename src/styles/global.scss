@@ -7,4 +7,27 @@
 html {
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Mobile-first responsive font sizing
+@media (max-width: 768px) {
+  html {
+    font-size: 56.25%; // Slightly smaller on mobile
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 68.75%; // Slightly larger on large screens
+  }
 }

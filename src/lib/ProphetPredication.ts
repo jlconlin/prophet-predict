@@ -147,10 +147,11 @@ export class ProphetPrediction implements ProphetPredictionType {
         ordinationDate: new Date(candidate.ordinationDate),
         data,
       });
-      graphData.sort((a: any, b: any) => {
-        return b.ordinationDate.getTime() - a.ordinationDate.getTime();
-      });
     }
+    // Sort by ordination date (oldest first - by seniority)
+    graphData.sort((a: any, b: any) => {
+      return a.ordinationDate.getTime() - b.ordinationDate.getTime();
+    });
     return graphData;
   }
 }
