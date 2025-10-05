@@ -31,7 +31,32 @@ export const viewport: Viewport = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var isDark = theme === 'dark' ||
+                    (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  }
+
+                  // Set theme-color meta tag
+                  var meta = document.createElement('meta');
+                  meta.name = 'theme-color';
+                  meta.content = isDark ? '#0f172a' : '#ffffff';
+                  document.head.appendChild(meta);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
           {children}

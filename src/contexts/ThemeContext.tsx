@@ -36,17 +36,14 @@ export function ThemeProvider({children}: {children: React.ReactNode}) {
   }, []);
 
   const updateThemeColor = (theme: Theme) => {
-    // Update theme-color meta tag for iOS Safari
-    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (!metaThemeColor) {
-      metaThemeColor = document.createElement('meta');
-      metaThemeColor.setAttribute('name', 'theme-color');
-      document.head.appendChild(metaThemeColor);
+    // Update existing theme-color meta tag for iOS Safari
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute(
+        'content',
+        theme === 'dark' ? '#0f172a' : '#ffffff'
+      );
     }
-    metaThemeColor.setAttribute(
-      'content',
-      theme === 'dark' ? '#0f172a' : '#ffffff'
-    );
   };
 
   const toggleTheme = () => {
