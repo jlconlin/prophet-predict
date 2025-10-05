@@ -4,6 +4,7 @@ import {timeFormat} from 'd3-time-format';
 import {format} from 'd3-format';
 import {graphDataType, graphDataPointType} from '@/types';
 import {useState, useEffect} from 'react';
+import DesktopLegend from './DesktopLegend';
 
 export default function LineGraph({
   data,
@@ -43,7 +44,8 @@ export default function LineGraph({
   );
 
   return (
-    <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px]">
+    <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px] relative">
+      <DesktopLegend data={data} />
       <ResponsiveLine
         data={sortedData}
         margin={
@@ -99,36 +101,7 @@ export default function LineGraph({
         useMesh={true}
         gridXValues={[0, 20, 40, 60, 80, 100, 120]}
         gridYValues={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]}
-        legends={
-          isMobile
-            ? []
-            : [
-                {
-                  anchor: 'top-right',
-                  direction: 'column',
-                  justify: false,
-                  translateX: isTablet ? -20 : -50,
-                  translateY: 20,
-                  itemsSpacing: 2,
-                  itemDirection: 'left-to-right',
-                  itemWidth: 80,
-                  itemHeight: 12,
-                  itemOpacity: 0.75,
-                  symbolSize: 12,
-                  symbolShape: 'circle',
-                  symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                  effects: [
-                    {
-                      on: 'hover',
-                      style: {
-                        itemBackground: 'rgba(0, 0, 0, .03)',
-                        itemOpacity: 1,
-                      },
-                    },
-                  ],
-                },
-              ]
-        }
+        legends={[]}
         tooltip={({point}) => {
           const pointData = point.data as graphDataPointType;
           const formattedDate = new Date(pointData.x).toLocaleDateString();

@@ -16,19 +16,6 @@
   --color-blue-400: #3b82f6;
   --color-blue-800: #1e40af;
 
-  /* Custom font sizes */
-  --font-size-2xs: 1.1rem;
-  --font-size-xs: 1.15rem;
-  --font-size-sm: 1.2rem;
-  --font-size-base: 1.3rem;
-  --font-size-lg: 1.35rem;
-  --font-size-xl: 1.4rem;
-  --font-size-2xl: 1.6rem;
-  --font-size-3xl: 1.8rem;
-  --font-size-4xl: 1.9rem;
-  --font-size-5xl: 2rem;
-  --font-size-6xl: 2.2rem;
-
   /* Custom animations */
   --animate-fadeIn: fadeIn 0.2s ease-out;
   --animate-fadeInSlow: fadeIn 0.3s ease-out;
@@ -52,7 +39,6 @@
 }
 
 html {
-  font-size: 62.5%;
   height: 100%;
 }
 
@@ -63,18 +49,6 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (max-width: 768px) {
-  html {
-    font-size: 56.25%;
-  }
-}
-
-@media (min-width: 1440px) {
-  html {
-    font-size: 68.75%;
-  }
 }
 
 /* Custom scrollbar styles for modal */
