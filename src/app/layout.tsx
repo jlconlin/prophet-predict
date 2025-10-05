@@ -4,6 +4,7 @@ import type {Metadata} from 'next';
 import {Analytics} from '@vercel/analytics/react';
 import {Inter} from 'next/font/google';
 import GoogleTagManager from '@/components/scripts/GoogleTagManager';
+import {ThemeProvider} from '@/contexts/ThemeContext';
 
 const inter = Inter({subsets: ['latin']});
 
@@ -40,9 +41,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <body className={inter.className}>
-        {children}
-        <Analytics />
-        <GoogleTagManager />
+        <ThemeProvider>
+          {children}
+          <Analytics />
+          <GoogleTagManager />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -30,8 +30,8 @@ export default function DesktopLegend({
   );
 
   return (
-    <div className="hidden md:block absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-4 min-w-[240px] z-10">
-      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800">
+    <div className="hidden md:block absolute top-4 right-4 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 p-4 min-w-[240px] z-10">
+      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800 dark:text-slate-100">
         Apostles
       </h3>
       <div className="space-y-2">
@@ -46,7 +46,7 @@ export default function DesktopLegend({
                   backgroundColor: colors[originalIndex % colors.length],
                 }}
               />
-              <span className="text-sm text-gray-700 leading-tight">
+              <span className="text-sm text-gray-700 dark:text-slate-300 leading-tight">
                 {item.id}
               </span>
             </div>

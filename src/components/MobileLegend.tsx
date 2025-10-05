@@ -30,8 +30,8 @@ export default function MobileLegend({
   );
 
   return (
-    <div className="p-4 bg-gray-50 border-t border-gray-200 overflow-y-auto flex-shrink-0 md:hidden">
-      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800">Apostles</h3>
+    <div className="p-4 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 overflow-y-auto flex-shrink-0 md:hidden">
+      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800 dark:text-slate-100">Apostles</h3>
       <div className="grid grid-flow-col auto-rows-auto grid-rows-[repeat(7,auto)] grid-cols-2 gap-2 sm:grid-rows-[repeat(5,auto)] sm:grid-cols-3">
         {sortedData.map((item) => {
           // Find the original index to get the correct color
@@ -44,7 +44,7 @@ export default function MobileLegend({
                   backgroundColor: colors[originalIndex % colors.length],
                 }}
               />
-              <span className="text-gray-700 leading-tight text-xs">{item.id}</span>
+              <span className="text-gray-700 dark:text-slate-300 leading-tight text-xs">{item.id}</span>
             </div>
           );
         })}

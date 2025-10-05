@@ -4,6 +4,7 @@ import {timeFormat} from 'd3-time-format';
 import {format} from 'd3-format';
 import {graphDataType, graphDataPointType} from '@/types';
 import {useState, useEffect} from 'react';
+import {useTheme} from '@/contexts/ThemeContext';
 import DesktopLegend from './DesktopLegend';
 
 export default function LineGraph({
@@ -13,6 +14,7 @@ export default function LineGraph({
 }): JSX.Element {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const {theme} = useTheme();
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -105,14 +107,32 @@ export default function LineGraph({
         theme={{
           tooltip: {
             container: {
-              background: 'white',
-              border: '1px solid #d1d5db',
+              background: theme === 'dark' ? '#1e293b' : 'white',
+              border: theme === 'dark' ? '1px solid #475569' : '1px solid #d1d5db',
               borderRadius: '0.375rem',
               boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
               padding: '12px',
               maxWidth: '20rem',
               maxHeight: '80vh',
               overflow: 'auto',
+              color: theme === 'dark' ? '#f1f5f9' : '#000',
+            },
+          },
+          axis: {
+            ticks: {
+              text: {
+                fill: theme === 'dark' ? '#cbd5e1' : '#374151',
+              },
+            },
+            legend: {
+              text: {
+                fill: theme === 'dark' ? '#cbd5e1' : '#374151',
+              },
+            },
+          },
+          grid: {
+            line: {
+              stroke: theme === 'dark' ? '#334155' : '#e5e7eb',
             },
           },
         }}
@@ -126,7 +146,7 @@ export default function LineGraph({
           ).toLocaleDateString();
 
           return (
-            <div className="bg-white p-3 border border-gray-300 shadow-lg rounded">
+            <div className="bg-white dark:bg-slate-800 p-3 border border-gray-300 dark:border-slate-600 shadow-lg rounded text-gray-900 dark:text-slate-100">
               <strong>{point.serieId}</strong>
               <br />
               Age: {formattedAge}
@@ -147,7 +167,7 @@ export default function LineGraph({
           );
 
           return (
-            <div className="flex flex-col bg-white border border-gray-300 rounded shadow-lg">
+            <div className="flex flex-col bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded shadow-lg">
               <div className="p-3" style={{minWidth: '200px'}}>
                 {sortedPoints.map((point) => {
                   const pointData = point.data as graphDataPointType;
@@ -161,16 +181,16 @@ export default function LineGraph({
                           className="w-3 h-3 rounded-full"
                           style={{backgroundColor: point.serieColor}}
                         />
-                        <strong className="text-sm">{point.serieId}</strong>
+                        <strong className="text-sm text-gray-900 dark:text-slate-100">{point.serieId}</strong>
                       </div>
-                      <div className="text-xs text-gray-600 ml-5">
+                      <div className="text-xs text-gray-600 dark:text-slate-400 ml-5">
                         Age: {formattedAge} | Probability: {formattedValue}
                       </div>
                     </div>
                   );
                 })}
               </div>
-              <div className="px-3 py-2 border-t border-gray-200 text-xs text-gray-500 bg-gray-50">
+              <div className="px-3 py-2 border-t border-gray-200 dark:border-slate-700 text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-900">
                 {new Date(slice.points[0].data.x).toLocaleDateString()}
               </div>
             </div>
