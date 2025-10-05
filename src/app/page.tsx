@@ -30,9 +30,9 @@ export default function Home(): React.JSX.Element {
   if (!results) return <div className="text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-900 p-4">Error loading data</div>;
 
   return (
-    <div className="p-0 m-0 overflow-hidden h-full min-h-screen flex flex-col bg-white dark:bg-slate-900">
+    <div className="p-0 m-0 h-screen flex flex-col bg-white dark:bg-slate-900">
       <Header />
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto md:overflow-hidden">
         <LineGraph data={results} />
       </div>
     </div>

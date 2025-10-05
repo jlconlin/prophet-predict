@@ -54,7 +54,7 @@ export default function MobileLegend({
         });
 
   return (
-    <div className="p-3 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 overflow-y-auto flex-shrink-0 md:hidden">
+    <div className="p-3 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 md:hidden">
       <h3 className="text-xs font-semibold m-0 mb-2 text-gray-800 dark:text-slate-100">
         Apostles
         {hoverData && (
@@ -67,7 +67,7 @@ export default function MobileLegend({
           </span>
         )}
       </h3>
-      <div className="grid grid-flow-col auto-rows-auto grid-rows-[repeat(7,auto)] grid-cols-2 gap-x-3 gap-y-1.5 sm:grid-rows-[repeat(5,auto)] sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 sm:grid-cols-3">
         {displayData.map((item) => {
           // Find the original index to get the correct color
           const originalIndex = data.findIndex((d) => d.id === item.id);
