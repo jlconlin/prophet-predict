@@ -1,4 +1,6 @@
-export default function LoadingSpinner(): JSX.Element {
+import type React from 'react';
+
+export default function LoadingSpinner(): React.JSX.Element {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full gap-6 bg-white dark:bg-slate-900">
       <div className="w-[50px] h-[50px] border-4 border-black/10 dark:border-white/10 border-t-blue-400 rounded-full animate-spin"></div>

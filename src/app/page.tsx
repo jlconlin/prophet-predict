@@ -1,12 +1,13 @@
 'use client';
 
 import {useState, useEffect} from 'react';
+import type React from 'react';
 import Header from '@/components/Header';
 import LineGraph from '@/components/LineGraph';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import {graphDataType} from '@/types/index';
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   const [results, setResults] = useState<graphDataType[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

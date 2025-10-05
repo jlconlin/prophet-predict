@@ -1,5 +1,6 @@
 import {graphDataType, graphDataPointType} from '@/types';
 import {format} from 'd3-format';
+import type React from 'react';
 
 type HoverData = {
   date: string;
@@ -16,7 +17,7 @@ export default function DesktopLegend({
 }: {
   data: graphDataType[];
   hoverData: HoverData;
-}): JSX.Element {
+}): React.JSX.Element {
   const colors = [
     '#1f77b4',
     '#ff7f0e',

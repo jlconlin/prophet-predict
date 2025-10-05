@@ -2,7 +2,8 @@ import {ResponsiveLine} from '@nivo/line';
 import {timeYear} from 'd3-time';
 import {timeFormat} from 'd3-time-format';
 import {graphDataType, graphDataPointType} from '@/types';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
+import type React from 'react';
 import {useTheme} from '@/contexts/ThemeContext';
 import DesktopLegend from './DesktopLegend';
 import MobileLegend from './MobileLegend';
@@ -11,7 +12,7 @@ export default function LineGraph({
   data,
 }: {
   data: graphDataType[];
-}): JSX.Element {
+}): React.JSX.Element {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const {theme} = useTheme();
@@ -23,6 +24,29 @@ export default function LineGraph({
       data: graphDataPointType;
     }>;
   } | null>(null);
+
+  const handleSliceHover = useCallback((slice: any) => {
+    // Sort points by probability (highest first)
+    const sortedPoints = [...slice.points].sort(
+      (a: any, b: any) => Number(b.data.y) - Number(a.data.y)
+    );
+
+    const sliceData = {
+      date: String(slice.points[0].data.x),
+      points: sortedPoints.map((point: any) => ({
+        id: String(point.seriesId),
+        serieColor: point.seriesColor,
+        data: point.data as graphDataPointType,
+      })),
+    };
+
+    setHoveredSlice((prev) => {
+      if (prev?.date !== sliceData.date) {
+        return sliceData;
+      }
+      return prev;
+    });
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -111,8 +135,6 @@ export default function LineGraph({
         pointBorderColor={{from: 'serieColor'}}
         pointLabelYOffset={-12}
         useMesh={true}
-        gridXValues={[0, 20, 40, 60, 80, 100, 120]}
-        gridYValues={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]}
         legends={[]}
         theme={{
           tooltip: {
@@ -149,26 +171,8 @@ export default function LineGraph({
         tooltip={() => null}
         enableSlices="x"
         sliceTooltip={({slice}) => {
-          // Sort points by probability (highest first)
-          const sortedPoints = [...slice.points].sort(
-            (a, b) => Number(b.data.y) - Number(a.data.y)
-          );
-
-          // Update hovered slice state
-          const sliceData = {
-            date: String(slice.points[0].data.x),
-            points: sortedPoints.map((point) => ({
-              id: String(point.serieId),
-              serieColor: point.serieColor,
-              data: point.data as graphDataPointType,
-            })),
-          };
-
-          // Store the current slice data for the legend
-          if (hoveredSlice?.date !== sliceData.date) {
-            setHoveredSlice(sliceData);
-          }
-
+          // Use setTimeout to defer state update until after render
+          setTimeout(() => handleSliceHover(slice), 0);
           // Return null to hide the tooltip
           return null;
         }}

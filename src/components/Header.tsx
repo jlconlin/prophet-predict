@@ -1,9 +1,10 @@
 'use client';
 
 import {useState} from 'react';
+import type React from 'react';
 import {useTheme} from '@/contexts/ThemeContext';
 
-export default function Header(): JSX.Element {
+export default function Header(): React.JSX.Element {
   const [showInfo, setShowInfo] = useState(false);
   const {theme, toggleTheme} = useTheme();
 
