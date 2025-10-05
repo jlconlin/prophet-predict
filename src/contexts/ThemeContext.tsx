@@ -22,6 +22,7 @@ export function ThemeProvider({children}: {children: React.ReactNode}) {
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      updateThemeColor(savedTheme);
     } else {
       // Check system preference
       const prefersDark = window.matchMedia(
@@ -30,14 +31,30 @@ export function ThemeProvider({children}: {children: React.ReactNode}) {
       const initialTheme = prefersDark ? 'dark' : 'light';
       setTheme(initialTheme);
       document.documentElement.classList.toggle('dark', prefersDark);
+      updateThemeColor(initialTheme);
     }
   }, []);
+
+  const updateThemeColor = (theme: Theme) => {
+    // Update theme-color meta tag for iOS Safari
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.setAttribute('name', 'theme-color');
+      document.head.appendChild(metaThemeColor);
+    }
+    metaThemeColor.setAttribute(
+      'content',
+      theme === 'dark' ? '#0f172a' : '#ffffff'
+    );
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    updateThemeColor(newTheme);
   };
 
   // Prevent flash of unstyled content
