@@ -4,7 +4,6 @@ import {useState, useEffect} from 'react';
 import Header from '@/components/Header';
 import LineGraph from '@/components/LineGraph';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import MobileLegend from '@/components/MobileLegend';
 import {graphDataType} from '@/types/index';
 
 export default function Home(): JSX.Element {
@@ -34,7 +33,6 @@ export default function Home(): JSX.Element {
       <Header />
       <div className="flex-1 flex flex-col min-h-0">
         <LineGraph data={results} />
-        <MobileLegend data={results} />
       </div>
     </div>
   );

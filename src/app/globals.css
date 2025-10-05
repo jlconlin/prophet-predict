@@ -104,21 +104,11 @@ body {
 }
 
 /* Nivo tooltip positioning constraints */
-/* Force tooltips to use position fixed and constrain to viewport */
+/* Constrain tooltips within viewport bounds */
 div[style*="position: absolute"] > div[style*="transform"] {
   max-height: 70vh !important;
-  overflow-y: auto !important;
 }
 
-/* Constrain tooltip positioning within viewport bounds */
-div[role="tooltip"],
-div[style*="pointer-events: none"] {
+div[role="tooltip"] {
   max-height: 70vh !important;
-}
-
-/* Prevent tooltip from extending beyond viewport */
-@supports (max-height: 70vh) {
-  div[style*="position: absolute"][style*="top"] {
-    top: clamp(10px, var(--tooltip-top, 50%), calc(100vh - 70vh - 10px)) !important;
-  }
 }

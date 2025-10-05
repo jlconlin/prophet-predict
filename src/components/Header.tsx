@@ -9,28 +9,28 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-      <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 px-8 py-5 md:px-8">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h1 className="m-0 text-3xl md:text-2xl font-semibold text-gray-800 dark:text-slate-100 tracking-tight">
+      <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 px-4 py-3 md:px-8 md:py-5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <h1 className="m-0 text-xl md:text-2xl font-semibold text-gray-800 dark:text-slate-100 tracking-tight">
               Prophet Predict
             </h1>
-            <p className="mt-1 text-base md:text-sm text-gray-500 dark:text-slate-400 font-normal">
+            <p className="mt-0.5 md:mt-1 text-xs md:text-sm text-gray-500 dark:text-slate-400 font-normal leading-tight">
               Statistical probabilities of succession in The Church of Jesus Christ of Latter-day Saints
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             <button
               className="bg-gray-100 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md p-2 flex items-center justify-center cursor-pointer text-gray-700 dark:text-slate-300 transition-all duration-200 hover:bg-gray-200 dark:hover:bg-slate-700 hover:border-gray-400 dark:hover:border-slate-500 active:bg-gray-300 dark:active:bg-slate-600"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                 </svg>
               ) : (
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
@@ -40,18 +40,18 @@ export default function Header(): JSX.Element {
               )}
             </button>
             <button
-              className="bg-gray-100 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md px-5 py-2 md:px-4 md:py-2 flex items-center gap-2 cursor-pointer text-gray-700 dark:text-slate-300 text-base md:text-sm font-medium transition-all duration-200 hover:bg-gray-200 dark:hover:bg-slate-700 hover:border-gray-400 dark:hover:border-slate-500 active:bg-gray-300 dark:active:bg-slate-600"
+              className="bg-gray-100 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md px-3 py-2 md:px-4 md:py-2 flex items-center gap-1.5 cursor-pointer text-gray-700 dark:text-slate-300 text-sm md:text-sm font-medium transition-all duration-200 hover:bg-gray-200 dark:hover:bg-slate-700 hover:border-gray-400 dark:hover:border-slate-500 active:bg-gray-300 dark:active:bg-slate-600"
               onClick={() => setShowInfo(!showInfo)}
               aria-label="Show methodology information"
             >
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fillRule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                   clipRule="evenodd"
                 />
               </svg>
-              <span>About</span>
+              <span className="hidden sm:inline">About</span>
             </button>
           </div>
         </div>

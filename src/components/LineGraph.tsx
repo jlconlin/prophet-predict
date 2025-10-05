@@ -1,11 +1,11 @@
 import {ResponsiveLine} from '@nivo/line';
 import {timeYear} from 'd3-time';
 import {timeFormat} from 'd3-time-format';
-import {format} from 'd3-format';
 import {graphDataType, graphDataPointType} from '@/types';
 import {useState, useEffect} from 'react';
 import {useTheme} from '@/contexts/ThemeContext';
 import DesktopLegend from './DesktopLegend';
+import MobileLegend from './MobileLegend';
 
 export default function LineGraph({
   data,
@@ -15,6 +15,14 @@ export default function LineGraph({
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const {theme} = useTheme();
+  const [hoveredSlice, setHoveredSlice] = useState<{
+    date: string;
+    points: Array<{
+      id: string;
+      serieColor: string;
+      data: graphDataPointType;
+    }>;
+  } | null>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -45,12 +53,14 @@ export default function LineGraph({
     new Date(sortedData[0].data[sortedData[0].data.length - 1].x)
   );
 
+
   return (
-    <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px] relative">
-      <DesktopLegend data={data} />
-      <ResponsiveLine
-        data={sortedData}
-        margin={
+    <>
+      <div className="w-full flex-1 min-h-0 md:min-h-[250px] sm:min-h-[400px] lg:min-h-[500px] lg:min-w-[800px] relative">
+        <DesktopLegend data={data} hoverData={hoveredSlice} />
+        <ResponsiveLine
+          data={sortedData}
+          margin={
           isMobile
             ? {top: 10, right: 10, bottom: 40, left: 40}
             : isTablet
@@ -136,29 +146,7 @@ export default function LineGraph({
             },
           },
         }}
-        tooltip={({point}) => {
-          const pointData = point.data as graphDataPointType;
-          const formattedDate = new Date(pointData.x).toLocaleDateString();
-          const formattedValue = format('.2%')(Number(pointData.y));
-          const formattedAge = pointData.age;
-          const formattedOrdinationDate = new Date(
-            pointData.ordinationDate
-          ).toLocaleDateString();
-
-          return (
-            <div className="bg-white dark:bg-slate-800 p-3 border border-gray-300 dark:border-slate-600 shadow-lg rounded text-gray-900 dark:text-slate-100">
-              <strong>{point.serieId}</strong>
-              <br />
-              Age: {formattedAge}
-              <br />
-              Ordination date: {formattedOrdinationDate}
-              <br />
-              Date: {formattedDate}
-              <br />
-              Value: {formattedValue}
-            </div>
-          );
-        }}
+        tooltip={() => null}
         enableSlices="x"
         sliceTooltip={({slice}) => {
           // Sort points by probability (highest first)
@@ -166,37 +154,27 @@ export default function LineGraph({
             (a, b) => Number(b.data.y) - Number(a.data.y)
           );
 
-          return (
-            <div className="flex flex-col bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded shadow-lg">
-              <div className="p-3" style={{minWidth: '200px'}}>
-                {sortedPoints.map((point) => {
-                  const pointData = point.data as graphDataPointType;
-                  const formattedValue = format('.2%')(Number(pointData.y));
-                  const formattedAge = pointData.age;
+          // Update hovered slice state
+          const sliceData = {
+            date: String(slice.points[0].data.x),
+            points: sortedPoints.map((point) => ({
+              id: String(point.serieId),
+              serieColor: point.serieColor,
+              data: point.data as graphDataPointType,
+            })),
+          };
 
-                  return (
-                    <div key={point.id} className="mb-2 last:mb-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{backgroundColor: point.serieColor}}
-                        />
-                        <strong className="text-sm text-gray-900 dark:text-slate-100">{point.serieId}</strong>
-                      </div>
-                      <div className="text-xs text-gray-600 dark:text-slate-400 ml-5">
-                        Age: {formattedAge} | Probability: {formattedValue}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="px-3 py-2 border-t border-gray-200 dark:border-slate-700 text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-900">
-                {new Date(slice.points[0].data.x).toLocaleDateString()}
-              </div>
-            </div>
-          );
+          // Store the current slice data for the legend
+          if (hoveredSlice?.date !== sliceData.date) {
+            setHoveredSlice(sliceData);
+          }
+
+          // Return null to hide the tooltip
+          return null;
         }}
       />
-    </div>
+      </div>
+      <MobileLegend data={data} hoverData={hoveredSlice} />
+    </>
   );
 }
