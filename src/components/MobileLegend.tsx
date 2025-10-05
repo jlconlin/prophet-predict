@@ -67,7 +67,7 @@ export default function MobileLegend({
           </span>
         )}
       </h3>
-      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 sm:grid-cols-3">
+      <div className="grid grid-flow-col grid-cols-2 gap-x-3 gap-y-1.5 sm:grid-cols-3 auto-rows-auto" style={{gridTemplateRows: 'repeat(7, auto)'}}>
         {displayData.map((item) => {
           // Find the original index to get the correct color
           const originalIndex = data.findIndex((d) => d.id === item.id);
