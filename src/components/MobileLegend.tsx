@@ -31,7 +31,7 @@ export default function MobileLegend({
 
   return (
     <div className="p-4 bg-gray-50 border-t border-gray-200 overflow-y-auto flex-shrink-0 md:hidden">
-      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800">Candidates</h3>
+      <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800">Apostles</h3>
       <div className="grid grid-flow-col auto-rows-auto grid-rows-[repeat(7,auto)] grid-cols-2 gap-2 sm:grid-rows-[repeat(5,auto)] sm:grid-cols-3">
         {sortedData.map((item) => {
           // Find the original index to get the correct color

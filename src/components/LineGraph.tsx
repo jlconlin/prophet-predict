@@ -102,6 +102,20 @@ export default function LineGraph({
         gridXValues={[0, 20, 40, 60, 80, 100, 120]}
         gridYValues={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]}
         legends={[]}
+        theme={{
+          tooltip: {
+            container: {
+              background: 'white',
+              border: '1px solid #d1d5db',
+              borderRadius: '0.375rem',
+              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+              padding: '12px',
+              maxWidth: '20rem',
+              maxHeight: '80vh',
+              overflow: 'auto',
+            },
+          },
+        }}
         tooltip={({point}) => {
           const pointData = point.data as graphDataPointType;
           const formattedDate = new Date(pointData.x).toLocaleDateString();
@@ -112,7 +126,7 @@ export default function LineGraph({
           ).toLocaleDateString();
 
           return (
-            <div className="bg-white p-3 border border-gray-300">
+            <div className="bg-white p-3 border border-gray-300 shadow-lg rounded">
               <strong>{point.serieId}</strong>
               <br />
               Age: {formattedAge}
@@ -122,6 +136,43 @@ export default function LineGraph({
               Date: {formattedDate}
               <br />
               Value: {formattedValue}
+            </div>
+          );
+        }}
+        enableSlices="x"
+        sliceTooltip={({slice}) => {
+          // Sort points by probability (highest first)
+          const sortedPoints = [...slice.points].sort(
+            (a, b) => Number(b.data.y) - Number(a.data.y)
+          );
+
+          return (
+            <div className="flex flex-col bg-white border border-gray-300 rounded shadow-lg">
+              <div className="p-3" style={{minWidth: '200px'}}>
+                {sortedPoints.map((point) => {
+                  const pointData = point.data as graphDataPointType;
+                  const formattedValue = format('.2%')(Number(pointData.y));
+                  const formattedAge = pointData.age;
+
+                  return (
+                    <div key={point.id} className="mb-2 last:mb-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{backgroundColor: point.serieColor}}
+                        />
+                        <strong className="text-sm">{point.serieId}</strong>
+                      </div>
+                      <div className="text-xs text-gray-600 ml-5">
+                        Age: {formattedAge} | Probability: {formattedValue}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="px-3 py-2 border-t border-gray-200 text-xs text-gray-500 bg-gray-50">
+                {new Date(slice.points[0].data.x).toLocaleDateString()}
+              </div>
             </div>
           );
         }}

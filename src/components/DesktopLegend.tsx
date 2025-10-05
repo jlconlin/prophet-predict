@@ -32,7 +32,7 @@ export default function DesktopLegend({
   return (
     <div className="hidden md:block absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-4 min-w-[240px] z-10">
       <h3 className="text-sm font-semibold m-0 mb-3 text-gray-800">
-        Candidates
+        Apostles
       </h3>
       <div className="space-y-2">
         {sortedData.map((item) => {
