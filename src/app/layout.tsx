@@ -23,16 +23,12 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: [
-    {media: '(prefers-color-scheme: light)', color: '#ffffff'},
-    {media: '(prefers-color-scheme: dark)', color: '#0f172a'},
-  ],
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body className={inter.className}>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -56,8 +52,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             `,
           }}
         />
-      </head>
-      <body className={inter.className}>
         <ThemeProvider>
           {children}
           <Analytics />
