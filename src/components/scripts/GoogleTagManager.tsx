@@ -1,6 +1,7 @@
 import Script from 'next/script';
+import type React from 'react';
 
-export default function GoogleTagManager(): JSX.Element {
+export default function GoogleTagManager(): React.JSX.Element {
   if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') return <></>;
   return (
     <Script

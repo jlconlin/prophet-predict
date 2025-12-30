@@ -57,13 +57,20 @@ export class Candidate implements CandidateType {
       year,
       actuarialLifeTable
     );
-    const livingIncrement =
-      (startProbabilityLiving - endingProbabilityLiving) / 365;
+    let dailyDeathRate = 0;
+    if (startProbabilityLiving > 0 && endingProbabilityLiving > 0) {
+      dailyDeathRate =
+        1 - Math.pow(endingProbabilityLiving / startProbabilityLiving, 1 / 365);
+      dailyDeathRate = Math.max(0, Math.min(1, dailyDeathRate));
+    }
 
-    for (let dayOfYear = 0; dayOfYear <= 365; dayOfYear++) {
+    for (let dayOfYear = 0; dayOfYear < 365; dayOfYear++) {
       const totalAgeDays = startDayOfYear + dayOfYear;
-      const probabilityLiving =
-        startProbabilityLiving - dayOfYear * livingIncrement;
+      let probabilityLiving =
+        startProbabilityLiving * Math.pow(1 - dailyDeathRate, dayOfYear);
+
+      probabilityLiving = Math.max(0, Math.min(1, probabilityLiving));
+
       this.dailyLifeExpectancies[totalAgeDays] = {
         probabilityLiving,
         probabilityDead: 1 - probabilityLiving,
@@ -72,21 +79,38 @@ export class Candidate implements CandidateType {
   }
 
   getStartProbabilityLiving(year: number): number {
-    return year === 0
-      ? 1
-      : this.dailyLifeExpectancies[year * 365].probabilityLiving;
+    if (year === 0) {
+      return 1;
+    }
+    const previousYearLastDay = (year - 1) * 365 + 364;
+    const previousEntry = this.dailyLifeExpectancies[previousYearLastDay];
+
+    if (!previousEntry) {
+      console.warn(
+        `Missing previous year data for year ${year}, using cumulative calculation`
+      );
+    }
+
+    return previousEntry.probabilityLiving;
   }
 
   calculateEndingProbabilityLiving(
     year: number,
     actuarialLifeTable: DailyRatesType
   ): number {
+    if (year === 0) {
+      return 1 - actuarialLifeTable[this.ageDays].probabilityDead;
+    }
+
     const livingProbabilities: number[] = [];
-    for (let i = 0; i <= year; i++) {
+    for (let i = 0; i < year; i++) {
       livingProbabilities.push(
         1 - actuarialLifeTable[this.ageDays + i * 365].probabilityDead
       );
     }
+    livingProbabilities.push(
+      1 - actuarialLifeTable[this.ageDays + year * 365].probabilityDead
+    );
     return livingProbabilities.reduce((a, b) => a * b);
   }
 }

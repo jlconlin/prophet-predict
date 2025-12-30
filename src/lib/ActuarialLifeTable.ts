@@ -20,7 +20,7 @@ export class ActuarialLifeTable implements ActuarialLifeTableType {
 
   calculateDailyRates(): void {
     for (let year = 0; year <= 118; year++) {
-      for (let day = 0; day <= 365; day++) {
+      for (let day = 0; day < 365; day++) {
         const ageDays = year * 365 + day;
         const previousDeathProbability = this.raw[year].probabilityDead;
         const nextDeathProbability = this.raw[year + 1].probabilityDead;
@@ -36,6 +36,15 @@ export class ActuarialLifeTable implements ActuarialLifeTableType {
           probabilityDead,
         };
       }
+    }
+
+    // Add final entry for age 119 year 0 (day 43435)
+    if (this.raw[119]) {
+      const ageDays = 119 * 365;
+      this.dailyRates[ageDays] = {
+        probabilityLiving: 1 - this.raw[119].probabilityDead,
+        probabilityDead: this.raw[119].probabilityDead,
+      };
     }
   }
 }

@@ -59,6 +59,35 @@ export class ProphetPrediction implements ProphetPredictionType {
     this.candidates.forEach((candidate: CandidateType) => {
       this.calculateProphetProbability(candidate);
     });
+
+    if (process.env.NODE_ENV === 'development') {
+      this.validateProbabilities();
+    }
+  }
+
+  validateProbabilities(): void {
+    const daysToCheck = 30 * 365;
+    for (let day = 1; day < daysToCheck; day += 365) {
+      let totalProbability = 0;
+      for (const candidate of this.candidates) {
+        const prob =
+          candidate.dailyProphetProbabilities[day]?.probabilityProphet || 0;
+
+        if (prob < 0 || prob > 1) {
+          console.warn(
+            `Invalid probability for ${candidate.name} on day ${day}: ${prob}`
+          );
+        }
+
+        totalProbability += prob;
+      }
+
+      if (totalProbability > this.candidates.length) {
+        console.warn(
+          `Total probability on day ${day} is unusually high: ${totalProbability}`
+        );
+      }
+    }
   }
 
   calculateProphetProbability(candidate: CandidateType): void {
@@ -118,10 +147,11 @@ export class ProphetPrediction implements ProphetPredictionType {
         ordinationDate: new Date(candidate.ordinationDate),
         data,
       });
-      graphData.sort((a: any, b: any) => {
-        return b.ordinationDate.getTime() - a.ordinationDate.getTime();
-      });
     }
+    // Sort by ordination date (oldest first - by seniority)
+    graphData.sort((a: any, b: any) => {
+      return a.ordinationDate.getTime() - b.ordinationDate.getTime();
+    });
     return graphData;
   }
 }
